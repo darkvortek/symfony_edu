@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello FORM{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <h1>FORM </h1>
+        <div class="col-sm-12">
+            {{ form_start(form) }}
+            <div class="form_group">
+                <label for="textarea">{{ form_label(form.title) }}</label><br>
+                {{ form_widget(form.title) }}
+            </div>
+            <div class="form_group">
+                <label for="textarea">{{ form_label(form.author) }}</label><br>
+                {{ form_widget(form.author) }}
+            </div>
+            <div class="form_group">
+                <label for="textarea">{{ form_label(form.content) }}</label><br>
+                {{ form_widget(form.content) }}
+            </div>
+            <div class="form_group">
+                <label for="textarea">{{ form_label(form.category_id) }}</label><br>
+                {{ form_widget(form.category_id) }}
+            </div>
+            <div class="form_group">
+                <label for="textarea">{{ form_label(form.tags_id) }}</label><br>
+                {{ form_widget(form.tags_id) }}
+            </div>
+            <button type="submit">Добавить</button>
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+
+{% endblock %}

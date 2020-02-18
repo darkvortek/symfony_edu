@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ArticleController!{% endblock %}
+
+{% block body %}
+    <div class="p-3 text-white bg-dark">
+        <div class="container">
+            <div class="col-md-6 px-0">
+                <h1 class="display-4 font-italic">{{ post.title }}</h1>
+                <p class="lead my-3 text-muted">Posted: {{ post.CreateAt|date("F jS \\a\\t g:ia") }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 blog-main">
+                <div class="blog-post">
+                    {{ post.content }}
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9"></div>
+            <div class="col-md-3">
+                <a class="btn btn-warning" href="{{ path('update_post', {'post':post.id}) }}">I</a>
+                <a class="btn btn-danger" href="{{ path('delete_post', {'post':post.id}) }}">Х</a>
+            </div>
+        </div>
+        <h2>Comments</h2>
+        {% for comment in post.comments %}
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="card-body">
+                        <div class="auhtor">
+                            Author: {{ comment.author }}
+                        </div>
+                        <div class="created">
+                            Created: {{ comment.createdAt|date("F jS \\a\\t g:ia") }}
+                        </div>
+                        <div class="content">
+                            Content: {{ comment.content }}
+                        </div>
+                    </div>
+                </div>
+                <div class="com-md-2">
+                    <div class="btn-group">
+                        <div class="text-white bg-white"><a class="btn btn-warning" href="{{ path('comment_update_form', {'post':post.id, 'comment':comment.id}) }}">I</a></div>
+                        <div class="text-white bg-white"><a class="btn btn-danger" href="{{ path('comment_delete', {'post':post.id, 'comment':comment.id}) }}">Х</a></div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        {{ render(controller( 'App\\Controller\\CommentController::create', {'article' : post.id} )) }}
+
+
+    </div>
+{% endblock %}
